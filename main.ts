@@ -1,21 +1,33 @@
 import { createThothClient } from "./src/thoth.ts";
 
 const kv = await Deno.openKv();
-const thoth = createThothClient(kv, 2);
+const thoth = createThothClient(kv, 3);
 
-await thoth.flash();
+await thoth.flash(true);
 
-await thoth.register("ABCDEFG", "000003");
-await thoth.register("あいうえおかきくけこ", "000004");
+await thoth.register(["ABCDEFG", "abcdefg"], "000003");
+//await thoth.analysis();
 
-await thoth.task("* * * * *");
+//await thoth.register("あいうえおかきくけこ", "000004");
 
-await thoth.search("DF");
-await thoth.search("DEF");
-await thoth.search("くけ");
+Deno.cron("THOTH TASK", "* * * * *", async () => {
+  console.log("THOTH TASK");
+  await thoth.analysis();
+  await thoth.unregisterTask();
+});
 
-await thoth.unregister("000004", false);
+console.log(await thoth.search("DF"));
+console.log(await thoth.search("DEF"));
+//console.log(await thoth.search("くけ"));
 
-setInterval(() => {
-  thoth.search("くけ");
+await thoth.unregister("000003", true);
+console.log(await thoth.search("DEF"));
+
+//
+//await thoth.unregister("000004", false);
+//
+setInterval(async () => {
+  console.log("Search");
+  console.log(await thoth.search("DEF"));
+  //  thoth.search("くけ");
 }, 5000);
