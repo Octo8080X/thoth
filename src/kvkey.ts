@@ -45,4 +45,3 @@ export function getThothLazyUnregisterKey(inputId: string | number) {
 export function getThothLazyUnregisterKeys() {
   return [KV_SERVICE_KEY, THOTH_LAZY_UNREGISTER_KEY] as const;
 }
-

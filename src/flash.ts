@@ -1,4 +1,3 @@
-/// <reference lib="deno.unstable" />
 import { KV_SERVICE_KEY } from "./kvkey.ts";
 
 export function getFlashFunc(kv: Deno.Kv) {

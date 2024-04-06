@@ -7,14 +7,18 @@ import { getAnalysisFunc } from "./analysis.ts";
 import { getFlashFunc } from "./flash.ts";
 import { getSearchFunc } from "./search.ts";
 
-type ThothClient ={
-  register: (rawData: string[], originId: string, lazy?: boolean) => Promise<void>,
-  analysis: () => Promise<void>,
-  unregister: (originId: string, lazy?: boolean) => Promise<void>,
-  search: (keyword: string) => Promise<Set<string>>,
-  flash: (lazy?: boolean) => Promise<void>,
-  unregisterTask: () => Promise<void>
-}
+type ThothClient = {
+  register: (
+    rawData: string[],
+    originId: string,
+    lazy?: boolean,
+  ) => Promise<void>;
+  analysis: () => Promise<void>;
+  unregister: (originId: string, lazy?: boolean) => Promise<void>;
+  search: (keyword: string) => Promise<Set<string>>;
+  flash: (lazy?: boolean) => Promise<void>;
+  unregisterTask: () => Promise<void>;
+};
 
 export function createThothClient(
   kv: Deno.Kv,

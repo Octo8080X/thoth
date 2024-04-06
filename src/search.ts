@@ -1,5 +1,3 @@
-/// <reference lib="deno.unstable" />
-
 import { getThothGramKeyPrefix } from "./kvkey.ts";
 
 export function getSearchFunc(kv: Deno.Kv, gram: number) {

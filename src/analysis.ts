@@ -1,4 +1,3 @@
-/// <reference lib="deno.unstable" />
 import {
   getThothAnalysisKey,
   getThothAnalysisProgressKey,
