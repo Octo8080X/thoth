@@ -4,10 +4,11 @@ import {
   assertArrayIncludes,
   assertEquals,
   assertNotEquals,
+  assertThrows,
 } from "jsr:@std/assert";
 import { createThothClient } from "../src/thoth.ts";
 import { afterEach, beforeEach, describe, it } from "jsr:@std/testing/bdd";
-import {generateText, mixText} from "./text-generator.ts"
+import { generateText, mixText } from "./text-generator.ts";
 
 describe("Thoth", () => {
   let kv: Deno.Kv;
@@ -66,6 +67,10 @@ describe("Thoth", () => {
         "000001",
       ]);
 
+      assertArrayIncludes(Array.from(await thothClient.search("ABCD")), [
+        "000001",
+      ]);
+
       assertArrayIncludes(Array.from(await thothClient.search("BA")), []);
     });
     it("sync 3-gram ", async () => {
@@ -108,9 +113,12 @@ describe("Thoth", () => {
     it("long text", async () => {
       const thothClient = createThothClient(kv, 3);
 
-      const chars1 = "abcdefghijklmnopqrstuvwxyzDEFGHIJKLMNOPQRSTUVWXYZ0123456789" as const;
-      const chars2 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" as const;
-      const chars3 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" as const;
+      const chars1 =
+        "abcdefghijklmnopqrstuvwxyzDEFGHIJKLMNOPQRSTUVWXYZ0123456789" as const;
+      const chars2 =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" as const;
+      const chars3 =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" as const;
       const baseText1 = generateText(10000, chars1);
       const baseText2 = generateText(10000, chars2);
       const baseText3 = generateText(10000, chars3);
@@ -120,15 +128,24 @@ describe("Thoth", () => {
 
       await thothClient.register([text1, text2, text3], "000001");
       await thothClient.register([baseText1, baseText2, baseText3], "000002");
-      
-      assertArrayIncludes(Array.from(await thothClient.search("ABC")), ["000001"]);
-      assertArrayIncludes(Array.from(await thothClient.search("あいう")), ["000001"]);
-      assertArrayIncludes(Array.from(await thothClient.search("佐藤")), ["000001"]);
-      assertArrayIncludes(Array.from(await thothClient.search("BC")), []);
-      assertArrayIncludes(Array.from(await thothClient.search("あい")), ["000001"]);
-      assertArrayIncludes(Array.from(await thothClient.search("いう")), ["000001"]);
-      assertArrayIncludes(Array.from(await thothClient.search("仁藤")), []);
 
+      assertArrayIncludes(Array.from(await thothClient.search("ABC")), [
+        "000001",
+      ]);
+      assertArrayIncludes(Array.from(await thothClient.search("あいう")), [
+        "000001",
+      ]);
+      assertArrayIncludes(Array.from(await thothClient.search("佐藤")), [
+        "000001",
+      ]);
+      assertArrayIncludes(Array.from(await thothClient.search("BC")), []);
+      assertArrayIncludes(Array.from(await thothClient.search("あい")), [
+        "000001",
+      ]);
+      assertArrayIncludes(Array.from(await thothClient.search("いう")), [
+        "000001",
+      ]);
+      assertArrayIncludes(Array.from(await thothClient.search("仁藤")), []);
     });
   });
 
@@ -212,8 +229,7 @@ describe("Thoth", () => {
       assertArrayIncludes(Array.from(await thothClient.search("IJ")), [
         "000002",
       ]);
-      assertArrayIncludes(Array.from(await thothClient.search("JK")), [
-      ]);
+      assertArrayIncludes(Array.from(await thothClient.search("JK")), []);
 
       assertArrayIncludes(Array.from(await thothClient.search("BA")), []);
     });
@@ -244,10 +260,7 @@ describe("Thoth", () => {
       ]);
       await thothClient.unregister("000001");
 
-      assertArrayIncludes(Array.from(await thothClient.search("AB")), [
-      ]);
-      
-
+      assertArrayIncludes(Array.from(await thothClient.search("AB")), []);
     });
     it("lazy", async () => {
       const thothClient = createThothClient(kv, 3);
@@ -262,10 +275,7 @@ describe("Thoth", () => {
       ]);
 
       await thothClient.unregisterTask();
-      assertArrayIncludes(Array.from(await thothClient.search("AB")), [
-      ]);
-
+      assertArrayIncludes(Array.from(await thothClient.search("AB")), []);
     });
   });
-
 });

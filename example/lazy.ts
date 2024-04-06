@@ -1,4 +1,3 @@
-
 import { createThothClient } from "../src/thoth.ts";
 
 const kv = await Deno.openKv();
@@ -34,4 +33,3 @@ setInterval(async () => {
   console.log("  Keyword: ueo =>", await thoth.search("ueo"));
   console.log("  Keyword: 一  =>", await thoth.search("一"));
 }, 5000);
-
