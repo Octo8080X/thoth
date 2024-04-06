@@ -1,9 +1,9 @@
 /// <reference lib="deno.unstable" />
 import { getThothLazyFlashKey, KV_SERVICE_KEY } from "./kvkey.ts";
 
-export function getFlashFunc(kv: Deno.Kv, defaultSync: boolean = false) {
-  return async function (sync: boolean = true) {
-    if (!(defaultSync || sync)) {
+export function getFlashFunc(kv: Deno.Kv, defaultLazy: boolean = false) {
+  return async function (lazy: boolean = true) {
+    if (!(defaultLazy || lazy)) {
       kv.set(getThothLazyFlashKey(), true);
       return;
     }

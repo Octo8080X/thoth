@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run --watch main.ts",
+    "example:sync": "deno run --unstable-kv example/sync.ts",
+    "example:lazy": "deno run --unstable-kv --unstable-cron example/lazy.ts",
     "test": "deno test --unstable-kv tests/thoth-test.ts"
   }
 }
