@@ -28,7 +28,7 @@ jobs:
         run: deno fmt --check
 
       - name: Run tests
-        run: deno test --unstable-kv --coverage=./coverage ./tests/thoth_test.ts
+        run: deno test --unstable-kv --coverage=./coverage ./tests/thoth-test.ts
 
       - name: View coverage
         run: |
