@@ -3,7 +3,7 @@ import {
   assertEquals,
   assertNotEquals,
 } from "jsr:@std/assert";
-import { createThothClient } from "jsr:@octo/thoth";
+import { createThothClient } from "../src/thoth.ts";
 import { afterEach, beforeEach, describe, it } from "jsr:@std/testing/bdd";
 import { generateText, mixText } from "./text-generator.ts";
 
