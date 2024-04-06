@@ -1,1 +1,1 @@
-export { ulid } from "https://deno.land/std@0.211.0/ulid/mod.ts";
+export { ulid } from "jsr:@std/ulid@0.221.0";
