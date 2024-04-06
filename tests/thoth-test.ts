@@ -2,9 +2,8 @@ import {
   assertArrayIncludes,
   assertEquals,
   assertNotEquals,
-  assertThrows,
 } from "jsr:@std/assert";
-import { createThothClient } from "../src/thoth.ts";
+import { createThothClient } from "jsr:@octo/thoth";
 import { afterEach, beforeEach, describe, it } from "jsr:@std/testing/bdd";
 import { generateText, mixText } from "./text-generator.ts";
 

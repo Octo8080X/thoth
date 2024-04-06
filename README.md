@@ -5,7 +5,7 @@
 ## Usage
 
 ```ts sample
-import { createThothClient } from "../src/thoth.ts";
+import { createThothClient } from "jsr:@octo/thoth";
 
 const kv = await Deno.openKv();
 const thoth = createThothClient(kv, 3);
