@@ -4,7 +4,6 @@ export const THOTH_RAW_INPUT_KEY = "RAW_INPUT" as const;
 export const THOTH_ANALYSIS_KEY = "ANALYSIS" as const;
 export const THOTH_ANALYSIS_PROGRESS_KEY = "PROGRESS" as const;
 export const THOTH_ANALYSIS_REVERSE_KEY = "ANALYSIS_REVERSE" as const;
-export const THOTH_LAZY_FLASH_KEY = "LAZY_FLASH" as const;
 export const THOTH_LAZY_UNREGISTER_KEY = "LAZY_UNREGISTER" as const;
 
 export const getThothGramKeyPrefix = (gram: number) => {
@@ -40,10 +39,6 @@ export function getThothAnalysisReverseKey(analysisId: string) {
 export function getThothAnalysisReverseKeys() {
   return [KV_SERVICE_KEY, THOTH_ANALYSIS_REVERSE_KEY] as const;
 }
-
-export function getThothLazyFlashKey() {
-  return [KV_SERVICE_KEY, THOTH_LAZY_FLASH_KEY] as const;
-}
 export function getThothLazyUnregisterKey(inputId: string | number) {
   return [KV_SERVICE_KEY, THOTH_LAZY_UNREGISTER_KEY, inputId] as const;
 }
@@ -51,6 +46,3 @@ export function getThothLazyUnregisterKeys() {
   return [KV_SERVICE_KEY, THOTH_LAZY_UNREGISTER_KEY] as const;
 }
 
-//export function getThothId(inputId: string) {
-//  return `THOTH_${inputId}` as const;
-//}
