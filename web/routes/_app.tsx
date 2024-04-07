@@ -8,7 +8,19 @@ export default function App({ Component }: PageProps) {
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>web</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@okutann88" />
+        <meta name="twitter:title" content="Thoth doc" />
+        <meta
+          name="twitter:description"
+          content="Thoth doc"
+        />
+        <meta
+          name="twitter:image"
+          content="https://thoth-doc.deno.dev/images/og_image.png"
+        />
+        <title>Thoth doc</title>
         <link rel="stylesheet" href="/styles.css" />
         <link
           rel="stylesheet"
