@@ -2,6 +2,12 @@
 
 `Thoth` is full-text search on Deno KV.
 
+## Docs 
+
+Documentation is here.
+
+[thoth-doc.deno.dev](https://thoth-doc.deno.dev/)
+
 ## Usage
 
 ```ts sample
