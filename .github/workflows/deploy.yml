@@ -31,4 +31,4 @@ jobs:
         with:
           project: "thoth-doc"
           entrypoint: "main.ts"
-          root: "./web"
+          root: "web"
