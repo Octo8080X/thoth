@@ -2,7 +2,7 @@
 
 `Thoth` is full-text search on Deno KV.
 
-## Docs 
+## Docs
 
 Documentation is here.
 
