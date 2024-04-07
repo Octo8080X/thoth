@@ -10,7 +10,6 @@ interface Page {
 
 export const handler: Handlers<Page> = {
   async GET(_req: Response, ctx: FreshContext) {
-    console.log(ctx.params);
     const relativePath = import.meta.resolve(
       "../doc/" + ctx.params.slag + ".md",
     );
