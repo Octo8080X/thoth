@@ -33,4 +33,3 @@ console.log("  Keyword: ABC =>", await thoth.search("ABC"));
 console.log("flash");
 await thoth.flash();
 console.log("  Keyword: ABC =>", await thoth.search("ABC"));
-
