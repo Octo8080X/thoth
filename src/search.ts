@@ -95,16 +95,30 @@ async function searchLongKeyword(kv: Deno.Kv, gram: number, keyword: string) {
     }
 
     Object.keys(result).forEach((v1) => {
+      if (!gramResult[v1]) {
+        delete result[v1];
+        return;
+      }
+
       Object.keys(result[v1]).forEach((v2: string) => {
+        if (!gramResult[v1][v2]) {
+          delete result[v1][v2];
+          return;
+        }
+
         result[v1][v2].forEach((v3: number) => {
           if (
             !gramResult[v1] || !gramResult[v1][v2] ||
             !gramResult[v1][v2].includes(v3 + index)
           ) {
-            delete result[v1][v2];
+            result[v1][v2] = result[v1][v2].filter((v4) => v4 != v3);
           }
         });
       });
+
+      if (Object.keys(result).length == 0) {
+        return {};
+      }
     });
   }
   return result;
