@@ -15,7 +15,9 @@ type ThothClient = {
   ) => Promise<void>;
   analysis: () => Promise<void>;
   unregister: (originId: string, lazy?: boolean) => Promise<void>;
-  search: (keyword: string) => Promise<Set<string>>;
+  search: (
+    keyword: string,
+  ) => Promise<{ [key: string]: { [key: string]: number[] } }>;
   flash: (lazy?: boolean) => Promise<void>;
   unregisterTask: () => Promise<void>;
 };

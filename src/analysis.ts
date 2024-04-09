@@ -37,12 +37,24 @@ export function getAnalysisOneFunc(kv: Deno.Kv, gram: number) {
         const atomic = kv
           .atomic()
           .set(
-            [...getThothGramKeyPrefix(gram), cell[2], thothId,cell[0],cell[1]],
+            [
+              ...getThothGramKeyPrefix(gram),
+              cell[2],
+              thothId,
+              cell[0],
+              cell[1],
+            ],
             analysis.value,
           )
           .set(
             [...getThothGramReverseKeyPrefix(gram), analysis.value!, cell[1]],
-            [...getThothGramKeyPrefix(gram), cell[2], thothId,cell[0],cell[1]],
+            [
+              ...getThothGramKeyPrefix(gram),
+              cell[2],
+              thothId,
+              cell[0],
+              cell[1],
+            ],
           )
           .set(getThothAnalysisProgressKey(thothId), [i, cell[0]]);
         await atomic.commit();

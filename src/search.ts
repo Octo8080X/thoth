@@ -30,7 +30,7 @@ async function searchShortKeyword(kv: Deno.Kv, gram: number, keyword: string) {
     end: [...getThothGramKeyPrefix(gram), endKeyword],
   });
 
-  let result:{[key:string]: {[key: string]: number[]}} = {};
+  let result: { [key: string]: { [key: string]: number[] } } = {};
   for await (const entry of entries) {
     const value = entry.value;
     const key = entry.key;
@@ -38,12 +38,12 @@ async function searchShortKeyword(kv: Deno.Kv, gram: number, keyword: string) {
     if (!result[value]) {
       result[value] = {};
     }
-    
-    if (!result[value][key[4]]) {
-      result[value][key[4]] = [];
+
+    if (!result[value][key[4] as string]) {
+      result[value][key[4] as string] = [];
     }
 
-    result = deepMerge(result, {[value]: {[key[4]]: [key[5]]}})
+    result = deepMerge(result, { [value]: { [key[4] as string]: [key[5]] } });
   }
   return result;
 }
@@ -53,7 +53,7 @@ async function searchEqualKeyword(kv: Deno.Kv, gram: number, keyword: string) {
     prefix: [...getThothGramKeyPrefix(gram), keyword],
   });
 
-  let result:{[key:string]: {[key: string]: number[]}} = {};
+  let result: { [key: string]: { [key: string]: number[] } } = {};
   for await (const entry of entries) {
     const value = entry.value;
     const key = entry.key;
@@ -61,12 +61,12 @@ async function searchEqualKeyword(kv: Deno.Kv, gram: number, keyword: string) {
     if (!result[value]) {
       result[value] = {};
     }
-    
+
     if (!result[value][key[4]]) {
       result[value][key[4]] = [];
     }
 
-    result = deepMerge(result, {[value]: {[key[4]]: [key[5]]}})
+    result = deepMerge(result, { [value]: { [key[4] as string]: [key[5]] } });
   }
   return result;
 }
@@ -80,13 +80,13 @@ async function searchLongKeyword(kv: Deno.Kv, gram: number, keyword: string) {
     count += 1;
   }
 
-  let result: {[key:string]: {[key: string]: number[]}} = {};
+  let result: { [key: string]: { [key: string]: number[] } } = {};
   let isFirst = true;
   for await (const [index, gramKeyword] of keywords.entries()) {
     const gramResult = await searchEqualKeyword(kv, gram, gramKeyword);
 
     if (isFirst) {
-      result = gramResult
+      result = gramResult;
       isFirst = false;
       if (Object.keys(result).length == 0) {
         break;
@@ -95,15 +95,17 @@ async function searchLongKeyword(kv: Deno.Kv, gram: number, keyword: string) {
     }
 
     Object.keys(result).forEach((v1) => {
-      Object.keys(result[v1]).forEach((v2:string) => {
-        result[v1][v2].forEach((v3:number) => {
-          if (!gramResult[v1] || !gramResult[v1][v2] || !gramResult[v1][v2].includes(v3 + index)) {
+      Object.keys(result[v1]).forEach((v2: string) => {
+        result[v1][v2].forEach((v3: number) => {
+          if (
+            !gramResult[v1] || !gramResult[v1][v2] ||
+            !gramResult[v1][v2].includes(v3 + index)
+          ) {
             delete result[v1][v2];
           }
-        })
+        });
       });
-
-    })
+    });
   }
   return result;
 }

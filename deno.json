@@ -4,11 +4,10 @@
   "exports": "./mod.ts",
   "tasks": {
     "example:sync": "deno run --unstable-kv example/sync.ts",
-    "example:lazy": "deno run --unstable-kv --unstable-cron example/lazy.ts",
-    "test": "deno test --unstable-kv tests/thoth-test.ts"
+    "example:lazy": "deno run --unstable-kv --unstable-cron example/lazy.ts"
   },
   "compilerOptions": {
-    "lib": ["deno.unstable"],
+    "lib": ["deno.unstable", "dom"],
     "module": "esnext",
     "target": "esnext",
     "baseUrl": ".",
