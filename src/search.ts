@@ -1,3 +1,4 @@
+import { deepMerge } from "../mod.ts";
 import { getThothGramKeyPrefix } from "./kvkey.ts";
 
 export function getSearchFunc(kv: Deno.Kv, gram: number) {
@@ -29,22 +30,43 @@ async function searchShortKeyword(kv: Deno.Kv, gram: number, keyword: string) {
     end: [...getThothGramKeyPrefix(gram), endKeyword],
   });
 
-  const result = new Set<string>();
+  let result:{[key:string]: {[key: string]: number[]}} = {};
   for await (const entry of entries) {
     const value = entry.value;
-    result.add(value);
+    const key = entry.key;
+
+    if (!result[value]) {
+      result[value] = {};
+    }
+    
+    if (!result[value][key[4]]) {
+      result[value][key[4]] = [];
+    }
+
+    result = deepMerge(result, {[value]: {[key[4]]: [key[5]]}})
   }
   return result;
 }
+
 async function searchEqualKeyword(kv: Deno.Kv, gram: number, keyword: string) {
   const entries = await kv.list<string>({
     prefix: [...getThothGramKeyPrefix(gram), keyword],
   });
 
-  const result = new Set<string>();
+  let result:{[key:string]: {[key: string]: number[]}} = {};
   for await (const entry of entries) {
     const value = entry.value;
-    result.add(value);
+    const key = entry.key;
+
+    if (!result[value]) {
+      result[value] = {};
+    }
+    
+    if (!result[value][key[4]]) {
+      result[value][key[4]] = [];
+    }
+
+    result = deepMerge(result, {[value]: {[key[4]]: [key[5]]}})
   }
   return result;
 }
@@ -58,25 +80,30 @@ async function searchLongKeyword(kv: Deno.Kv, gram: number, keyword: string) {
     count += 1;
   }
 
-  let result: string[] = [];
+  let result: {[key:string]: {[key: string]: number[]}} = {};
   let isFirst = true;
-  for await (const gramKeyword of keywords) {
+  for await (const [index, gramKeyword] of keywords.entries()) {
     const gramResult = await searchEqualKeyword(kv, gram, gramKeyword);
 
     if (isFirst) {
-      Array.from(gramResult).map((g) => result.push(g));
+      result = gramResult
       isFirst = false;
-      if (result.length == 0) {
+      if (Object.keys(result).length == 0) {
         break;
       }
       continue;
     }
-    if (gramResult.size == 0) {
-      result = [];
-      break;
-    }
 
-    result = result.filter((r) => gramResult.has(r));
+    Object.keys(result).forEach((v1) => {
+      Object.keys(result[v1]).forEach((v2:string) => {
+        result[v1][v2].forEach((v3:number) => {
+          if (!gramResult[v1] || !gramResult[v1][v2] || !gramResult[v1][v2].includes(v3 + index)) {
+            delete result[v1][v2];
+          }
+        })
+      });
+
+    })
   }
-  return new Set(result);
+  return result;
 }

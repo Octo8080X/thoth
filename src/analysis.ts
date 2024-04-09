@@ -30,19 +30,19 @@ export function getAnalysisOneFunc(kv: Deno.Kv, gram: number) {
     for await (const row of rows) {
       const cells = [];
       for (let j = isZeroResetJ ? 0 : initJ; j + gram <= row.length; j++) {
-        cells.push([j, row.slice(j, j + gram)]);
+        cells.push([i, j, row.slice(j, j + gram)]);
       }
 
       for await (const cell of cells) {
         const atomic = kv
           .atomic()
           .set(
-            [...getThothGramKeyPrefix(gram), cell[1], thothId],
+            [...getThothGramKeyPrefix(gram), cell[2], thothId,cell[0],cell[1]],
             analysis.value,
           )
           .set(
             [...getThothGramReverseKeyPrefix(gram), analysis.value!, cell[1]],
-            [...getThothGramKeyPrefix(gram), cell[1], thothId],
+            [...getThothGramKeyPrefix(gram), cell[2], thothId,cell[0],cell[1]],
           )
           .set(getThothAnalysisProgressKey(thothId), [i, cell[0]]);
         await atomic.commit();

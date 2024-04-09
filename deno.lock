@@ -2,12 +2,17 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "jsr:@cross/deepmerge": "jsr:@cross/deepmerge@1.0.0",
       "jsr:@std/assert": "jsr:@std/assert@0.221.0",
       "jsr:@std/fmt@^0.221.0": "jsr:@std/fmt@0.221.0",
       "jsr:@std/testing": "jsr:@std/testing@0.221.0",
-      "jsr:@std/ulid@0.221.0": "jsr:@std/ulid@0.221.0"
+      "jsr:@std/ulid@0.221.0": "jsr:@std/ulid@0.221.0",
+      "npm:deepmerge": "npm:deepmerge@4.3.1"
     },
     "jsr": {
+      "@cross/deepmerge@1.0.0": {
+        "integrity": "1e1318a74e31ba1959b9aa0acae8bd417b806f74ffd25ac07c90e12f83ad6b1d"
+      },
       "@std/assert@0.221.0": {
         "integrity": "a5f1aa6e7909dbea271754fd4ab3f4e687aeff4873b4cef9a320af813adb489a",
         "dependencies": [
@@ -22,6 +27,12 @@
       },
       "@std/ulid@0.221.0": {
         "integrity": "6d99398a5027d87fa6a05248cb47293f2344d02f2d787daf9b4277bd1f768cfd"
+      }
+    },
+    "npm": {
+      "deepmerge@4.3.1": {
+        "integrity": "sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==",
+        "dependencies": {}
       }
     }
   },

@@ -6,5 +6,14 @@
     "example:sync": "deno run --unstable-kv example/sync.ts",
     "example:lazy": "deno run --unstable-kv --unstable-cron example/lazy.ts",
     "test": "deno test --unstable-kv tests/thoth-test.ts"
+  },
+  "compilerOptions": {
+    "lib": ["deno.unstable"],
+    "module": "esnext",
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@octo/thoth": ["mod.ts"]
+    }
   }
 }
