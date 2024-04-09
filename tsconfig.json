@@ -1,0 +1,12 @@
+{
+
+"compilerOptions": {
+    "lib": ["deno.unstable", "dom"],
+    "module": "esnext",
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "@octo/thoth": ["mod.ts"]
+    }
+  }
+}
