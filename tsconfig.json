@@ -1,6 +1,5 @@
 {
-
-"compilerOptions": {
+  "compilerOptions": {
     "lib": ["deno.unstable", "dom"],
     "module": "esnext",
     "target": "esnext",
