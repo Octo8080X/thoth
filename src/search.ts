@@ -43,7 +43,7 @@ async function searchShortKeyword(kv: Deno.Kv, gram: number, keyword: string) {
       result[value][key[4] as string] = [];
     }
 
-    result = deepMerge(result, { [value]: { [key[4] as string]: [key[5]] } });
+    result = deepMerge(result, { [value]: { [key[4].toString()]: [Number(key[5])] } });
   }
   return result;
 }
@@ -62,11 +62,11 @@ async function searchEqualKeyword(kv: Deno.Kv, gram: number, keyword: string) {
       result[value] = {};
     }
 
-    if (!result[value][key[4]]) {
-      result[value][key[4]] = [];
+    if (!result[value][key[4].toString()]) {
+      result[value][key[4].toString()] = [];
     }
 
-    result = deepMerge(result, { [value]: { [key[4] as string]: [key[5]] } });
+    result = deepMerge(result, { [value]: { [key[4].toString()]: [Number(key[5])] } });
   }
   return result;
 }
