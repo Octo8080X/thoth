@@ -2,7 +2,7 @@
   "version": "3",
   "packages": {
     "specifiers": {
-      "jsr:@cross/deepmerge": "jsr:@cross/deepmerge@1.0.0",
+      "jsr:@cross/deepmerge@1.0.0": "jsr:@cross/deepmerge@1.0.0",
       "jsr:@std/assert": "jsr:@std/assert@0.221.0",
       "jsr:@std/fmt@^0.221.0": "jsr:@std/fmt@0.221.0",
       "jsr:@std/testing": "jsr:@std/testing@0.221.0",

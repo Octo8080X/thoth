@@ -1,4 +1,4 @@
-import { deepMerge } from "../mod.ts";
+import { deepMerge } from "../deps.ts";
 import { getThothGramKeyPrefix } from "./kvkey.ts";
 
 export function getSearchFunc(kv: Deno.Kv, gram: number) {
