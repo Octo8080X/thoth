@@ -74,6 +74,150 @@ title: API
 
 <div class="divider"></div>
 
+<h2 class="text-3xl font-black pb-2" id="create-client">
+  <a href="#create-client" class="link link-primary opacity-25 hover:opacity-100 inline-block">
+    #
+  </a>
+  Create client
+</h2>
+
+<div class="pl-2 font-normal">
+  <p>
+    Function to create `Thoth client`.
+  </p>
+  <p>
+    createThothClient(kv: Deno.Kv, gram: number)
+  </p>
+  <p>
+    `gram` is the number of characters to use for n-gram.
+  </p>
+</div>
+
+<pre
+class="theme-arta shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"
+>
+<code class="language-ts">import { createThothClient } from "jsr:@octo/thoth";
+
+const kv = await Deno.openKv();
+const thoth = createThothClient(kv, 3);
+</code></pre>
+
+<h2 class="text-3xl font-black py-2" id="methods">
+  <a href="#methods" class="link link-primary opacity-25 hover:opacity-100 inline-block">
+    #
+  </a>
+  Methods
+</h2>
+
+<div class="pl-2 font-normal">
+  <ul class="list-inside list-disc font-black">
+    <li>thoth.register(rawData, originId)</li>
+    <li>thoth.register(rawData, originId, lazy)</li>
+    <li>thoth.analysis()</li>
+    <li>thoth.unregister(originId)</li>
+    <li>thoth.unregister(originId, lazy)</li>
+    <li>thoth.search(keyword)</li>
+    <li>thoth.flash()</li>
+    <li>thoth.unregisterTask()</li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<h2 class="text-3xl font-black py-2" id="register">
+  <a href="#register" class="link link-primary opacity-25 hover:opacity-100 inline-block">
+    #
+  </a>
+  register
+</h2>
+
+<pre
+class="theme-arta shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"
+>
+<code class="language-ts">// Immediate analysis execution.
+await thoth.register(["ABCDEFG", "abcdefg"], "000001");
+
+// Delayed execution of analysis process.
+await thoth.register(["ABCDEFG", "abcdefg"], "000002", true);
+</code></pre>
+<div class="divider"></div>
+
+<h2 class="text-3xl font-black py-2" id="analysis">
+  <a href="#analysis" class="link link-primary opacity-25 hover:opacity-100 inline-block">
+    #
+  </a>
+  analysis
+</h2>
+
+<pre
+class="theme-arta shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"
+>
+<code class="language-ts">// Analysis Execution
+thoth.analysis()
+</code></pre>
+<div class="divider"></div>
+
+<h2 class="text-3xl font-black py-2" id="unregister">
+  <a href="#unregister" class="link link-primary opacity-25 hover:opacity-100 inline-block">
+    #
+  </a>
+  unregister
+</h2>
+
+<pre
+class="theme-arta shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"
+>
+<code class="language-ts">// Unsubscribe from registered entries
+thoth.unregister("000001");
+</code></pre>
+<div class="divider"></div>
+
+<h2 class="text-3xl font-black py-2" id="search">
+  <a href="#search" class="link link-primary opacity-25 hover:opacity-100 inline-block">
+    #
+  </a>
+  search
+</h2>
+
+<pre
+class="theme-arta shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"
+>
+<code class="language-ts">// Search from registered entries
+thoth.search("ABCD")
+</code></pre>
+<div class="divider"></div>
+
+<h2 class="text-3xl font-black py-2" id="flash">
+  <a href="#flash" class="link link-primary opacity-25 hover:opacity-100 inline-block">
+    #
+  </a>
+  flash
+</h2>
+
+<pre
+class="theme-arta shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"
+>
+<code class="language-ts">// Delete a registered entry
+thoth.flash()
+</code></pre>
+<div class="divider"></div>
+
+<h2 class="text-3xl font-black py-2" id="unregister-task">
+  <a href="#unregister-task" class="link link-primary opacity-25 hover:opacity-100 inline-block">
+    #
+  </a>
+  unregisterTask
+</h2>
+
+<pre
+class="theme-arta shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"
+>
+<code class="language-ts">// Delayed processing registered deregistration process
+thoth.unregisterTask()
+</code></pre>
+<div class="divider"></div>
+
+
 <h2 class="text-3xl font-black pb-2" id="links">
   <a href="#links" class="link link-primary opacity-25 hover:opacity-100 inline-block">
     #
@@ -92,6 +236,7 @@ title: API
     <a href="/api/lazy" class="link link-primary hover:opacity-90 inline-block">
       Lazy API
     </a>
-
 </li>
 </ul>
+
+<script>hljs.highlightAll();</script>

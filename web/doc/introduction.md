@@ -59,17 +59,21 @@ class="theme-arta shadow-3xl text-sm relative overflow-hidden max-w-full tab-siz
 <code class="language-ts">// main.ts
 import { createThothClient } from "jsr:@octo/thoth";
 
-const kv = await Deno.openKv(":memory:");
+const kv = await Deno.openKv();
 const thoth = createThothClient(kv, 3);
 
 await thoth.register(["ABCDEFG", "abcdefg"], "000001");
 await thoth.register(["あいうえお", "aiueo"], "000002");
+await thoth.register(["ABCDEFGABCDEFG", "abcdefgabcdefg"], "000003");
 
 console.log(await thoth.search("ABC"));
-// => Set(1) { "000001" }
+// => { "000001": { "0": [ 0 ] } }
 
 console.log(await thoth.search("AC"));
-// => Set(0) { }
+// => {}
+
+console.log(await thoth.search("ef"));
+// => { "000001": { "1": [ 4 ] }, "000003": { "1": [ 4, 11 ] } }
 </code></pre>
 
 <div class="pl-2 font-normal">
@@ -79,8 +83,9 @@ console.log(await thoth.search("AC"));
 </div>
 
 <pre class="theme-arta shadow-3xl text-sm relative overflow-hidden max-w-full tab-size h-full"><code class="language-sh">$ deno run --unstable-kv main.ts
-Set(1) { "000001" }
-Set(0) { }
+{ "000001": { "0": [ 0 ] }, "000003": { "0": [ 0, 7 ] } }
+{}
+{ "000001": { "1": [ 4 ] }, "000003": { "1": [ 4, 11 ] } }
 </code></pre>
 
 <div class="divider"></div>
