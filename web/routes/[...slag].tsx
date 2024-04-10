@@ -1,4 +1,4 @@
-import { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
+import type { FreshContext, Handlers, PageProps } from "$fresh/server.ts";
 import { extract } from "$std/front_matter/yaml.ts";
 import { Head } from "$fresh/runtime.ts";
 import markdownit from "npm:markdown-it";

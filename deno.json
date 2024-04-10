@@ -1,10 +1,9 @@
 {
   "name": "@octo/thoth",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "exports": "./mod.ts",
   "tasks": {
     "example:sync": "deno run --unstable-kv example/sync.ts",
-    "example:lazy": "deno run --unstable-kv --unstable-cron example/lazy.ts",
-    "test": "deno test --unstable-kv tests/thoth-test.ts"
+    "example:lazy": "deno run --unstable-kv --unstable-cron example/lazy.ts"
   }
 }

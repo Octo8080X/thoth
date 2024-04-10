@@ -28,9 +28,6 @@ export function DocIndex() {
         <li>
           <ul>
             <li>
-              <a href="/api/sync">Sync API</a>
-            </li>
-            <li>
               <a href="/api/lazy">Lazy API</a>
             </li>
           </ul>

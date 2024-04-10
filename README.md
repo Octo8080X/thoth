@@ -20,10 +20,14 @@ await thoth.flash();
 
 await thoth.register(["ABCDEFG", "abcdefg"], "000001");
 await thoth.register(["あいうえお", "aiueo"], "000002");
+await thoth.register(["ABCDEFGABCDEFG", "abcdefgabcdefg"], "000003");
 
 console.log(await thoth.search("ABC"));
-// => Set(1) { "000001" }
+// => { "000001": { "0": [ 0 ] } }
 
 console.log(await thoth.search("AC"));
-// => Set(0) { }
+// => {}
+
+console.log(await thoth.search("ef"));
+// => { "000001": { "1": [ 4 ] }, "000003": { "1": [ 4, 11 ] } }
 ```
