@@ -217,7 +217,6 @@ thoth.unregisterTask()
 </code></pre>
 <div class="divider"></div>
 
-
 <h2 class="text-3xl font-black pb-2" id="links">
   <a href="#links" class="link link-primary opacity-25 hover:opacity-100 inline-block">
     #

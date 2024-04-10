@@ -117,11 +117,6 @@ describe("Thoth", () => {
       await thothClient.register(["ABCDEFG", "abcdefg"], "000001");
       await thothClient.register(["EFGHIJK", "efghijk"], "000002");
 
-      //      const entriesNotFlashed = await kv.list<string>({ prefix: ["THOTH"] });
-      //      for await (const entry of entriesNotFlashed) {
-      //        console.log(entry.key);
-      //      }
-
       assertEquals(await thothClient.search("AB"), { "000001": { "0": [0] } });
       assertEquals(await thothClient.search("BC"), { "000001": { "0": [1] } });
       assertEquals(await thothClient.search("CD"), { "000001": { "0": [2] } });
@@ -142,86 +137,64 @@ describe("Thoth", () => {
       assertEquals(await thothClient.search("BA"), {});
     });
 
-    //
-    //    it("sync 3-gram ", async () => {
-    //      const thothClient = createThothClient(kv, 3);
-    //      await thothClient.register(["ABCDEFG", "abcdefg"], "000001");
-    //      await thothClient.register(["EFGHIJK", "efghijk"], "000002");
-    //
-    //      assertArrayIncludes(Array.from(await thothClient.search("AB")), [
-    //        "000001",
-    //      ]);
-    //      assertArrayIncludes(Array.from(await thothClient.search("BC")), [
-    //        "000001",
-    //      ]);
-    //      assertArrayIncludes(Array.from(await thothClient.search("CD")), [
-    //        "000001",
-    //      ]);
-    //      assertArrayIncludes(Array.from(await thothClient.search("DE")), [
-    //        "000001",
-    //      ]);
-    //      assertArrayIncludes(Array.from(await thothClient.search("EF")), [
-    //        "000001",
-    //      ]);
-    //      assertArrayIncludes(Array.from(await thothClient.search("FG")), [
-    //        "000002",
-    //      ]);
-    //      assertArrayIncludes(Array.from(await thothClient.search("GH")), [
-    //        "000002",
-    //      ]);
-    //      assertArrayIncludes(Array.from(await thothClient.search("HI")), [
-    //        "000002",
-    //      ]);
-    //      assertArrayIncludes(Array.from(await thothClient.search("IJ")), [
-    //        "000002",
-    //      ]);
-    //      assertArrayIncludes(Array.from(await thothClient.search("JK")), []);
-    //
-    //      assertArrayIncludes(Array.from(await thothClient.search("BA")), []);
-    //    });
-    //
-    //    it("lazy", async () => {
-    //      const thothClient = createThothClient(kv, 3, true);
-    //      await thothClient.register(["ABCDEFG", "abcdefg"], "000001", true);
-    //      await thothClient.register(["EFGHIJK", "efghijk"], "000002", true);
-    //
-    //      assertArrayIncludes(Array.from(await thothClient.search("EFG")), []);
-    //
-    //      await thothClient.analysis();
-    //
-    //      assertArrayIncludes(Array.from(await thothClient.search("EFG")), [
-    //        "000001",
-    //        "000002",
-    //      ]);
-    //    });
-    //  });
-    //
-    //  describe("#unregister", () => {
-    //    it("sync", async () => {
-    //      const thothClient = createThothClient(kv, 2);
-    //      await thothClient.register(["ABCDEFG", "abcdefg"], "000001");
-    //
-    //      assertArrayIncludes(Array.from(await thothClient.search("AB")), [
-    //        "000001",
-    //      ]);
-    //      await thothClient.unregister("000001");
-    //
-    //      assertArrayIncludes(Array.from(await thothClient.search("AB")), []);
-    //    });
-    //    it("lazy", async () => {
-    //      const thothClient = createThothClient(kv, 3);
-    //      await thothClient.register(["ABCDEFG", "abcdefg"], "000001");
-    //
-    //      assertArrayIncludes(Array.from(await thothClient.search("AB")), [
-    //        "000001",
-    //      ]);
-    //      await thothClient.unregister("000001", true);
-    //      assertArrayIncludes(Array.from(await thothClient.search("AB")), [
-    //        "000001",
-    //      ]);
-    //
-    //      await thothClient.unregisterTask();
-    //      assertArrayIncludes(Array.from(await thothClient.search("AB")), []);
-    //    });
+    it("sync 3-gram ", async () => {
+      const thothClient = createThothClient(kv, 3);
+
+      await thothClient.register(["ABCDEFG", "abcdefg"], "000001");
+      await thothClient.register(["EFGHIJK", "efghijk"], "000002");
+
+      assertEquals(await thothClient.search("AB"), { "000001": { "0": [0] } });
+      assertEquals(await thothClient.search("BC"), { "000001": { "0": [1] } });
+      assertEquals(await thothClient.search("CD"), { "000001": { "0": [2] } });
+      assertEquals(await thothClient.search("DE"), { "000001": { "0": [3] } });
+      assertEquals(await thothClient.search("EF"), {
+        "000001": { "0": [4] },
+        "000002": { "0": [0] },
+      });
+      assertEquals(await thothClient.search("FG"), { "000002": { "0": [1] } });
+      assertEquals(await thothClient.search("GH"), { "000002": { "0": [2] } });
+      assertEquals(await thothClient.search("HI"), { "000002": { "0": [3] } });
+      assertEquals(await thothClient.search("IJ"), { "000002": { "0": [4] } });
+      assertEquals(await thothClient.search("JK"), {});
+      assertEquals(await thothClient.search("BA"), {});
+    });
+
+    it("lazy", async () => {
+      const thothClient = createThothClient(kv, 3, true);
+
+      await thothClient.register(["ABCDEFG", "abcdefg"], "000001", true);
+      await thothClient.register(["EFGHIJK", "efghijk"], "000002", true);
+      assertEquals(await thothClient.search("EFG"), {});
+
+      await thothClient.analysis();
+
+      assertEquals(await thothClient.search("EFG"), {
+        "000001": { "0": [4] },
+        "000002": { "0": [0] },
+      });
+    });
+  });
+
+  describe("#unregister", () => {
+    it("sync", async () => {
+      const thothClient = createThothClient(kv, 2);
+
+      await thothClient.register(["ABCDEFG", "abcdefg"], "000001");
+      assertEquals(await thothClient.search("AB"), { "000001": { "0": [0] } });
+
+      await thothClient.unregister("000001");
+      assertEquals(await thothClient.search("AB"), {});
+    });
+    it("lazy", async () => {
+      const thothClient = createThothClient(kv, 3);
+      await thothClient.register(["ABCDEFG", "abcdefg"], "000001");
+      assertEquals(await thothClient.search("AB"), { "000001": { "0": [0] } });
+
+      await thothClient.unregister("000001", true);
+      assertEquals(await thothClient.search("AB"), { "000001": { "0": [0] } });
+
+      await thothClient.unregisterTask();
+      assertEquals(await thothClient.search("AB"), {});
+    });
   });
 });

@@ -47,7 +47,12 @@ export function getAnalysisOneFunc(kv: Deno.Kv, gram: number) {
             analysis.value,
           )
           .set(
-            [...getThothGramReverseKeyPrefix(gram), analysis.value!, cell[1]],
+            [
+              ...getThothGramReverseKeyPrefix(gram),
+              analysis.value!,
+              cell[0],
+              cell[1],
+            ],
             [
               ...getThothGramKeyPrefix(gram),
               cell[2],
