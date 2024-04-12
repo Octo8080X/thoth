@@ -21,13 +21,12 @@ export const handler: Handlers = {
     }
 
     const thoth = createThothClient(kv, 4);
+
     const startTime = performance.now();
     const result = await thoth.search(q);
     const endTime = performance.now();
 
     const time = Math.ceil((endTime - startTime) * 1000) / 1000;
-
-    console.log(result);
 
     const searchResultRaw = Object.keys(result).map((key) => ["LINK", key]);
 

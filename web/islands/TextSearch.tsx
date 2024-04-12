@@ -50,7 +50,12 @@ export default function TextSearch() {
       {time != "" &&
         (
           <div class="container w-full pb-2">
-            Search performance {isLoading ? "loading..." : time}
+            <p>
+              Search performance {isLoading ? "loading..." : time}
+            </p>
+            <p>
+              Hit {list.length} items
+            </p>
           </div>
         )}
       <div class="container w-full pb-2">
