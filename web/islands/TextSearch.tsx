@@ -68,7 +68,7 @@ export default function TextSearch() {
             </tr>
           </thead>
           <tbody>
-            {!isLoading && list.map((item, _index: number) => (
+            {time != "" && !isLoading && list.map((item, _index: number) => (
               <tr>
                 <td>{item.title}</td>
                 <td>{item.author}</td>
