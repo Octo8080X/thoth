@@ -33,7 +33,6 @@ export function DocIndex() {
           </ul>
         </li>
         <li>
-           
           <a href="/playground">Playground<span class="indicator-item badge badge-primary">new</span></a>
         </li>
       </ul>
