@@ -18,7 +18,7 @@ export default function ({ data }: PageProps<Page | null>) {
           Thoth full text search playground.
         </p>
         <p>
-          Maximum of about 500 words excerpted from{"  "}
+          Maximum of about 500 characters excerpted from{"  "}
           <a
             href="https://www.aozora.gr.jp/index.html"
             target="_blank"
