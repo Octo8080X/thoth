@@ -23,14 +23,17 @@ export function DocIndex() {
         </li>
 
         <li>
-          <a href="/api">API</a>
+          <a href="/api_doc">API</a>
         </li>
         <li>
           <ul>
             <li>
-              <a href="/api/lazy">Lazy API</a>
+              <a href="/api_doc/lazy">Lazy API</a>
             </li>
           </ul>
+        </li>
+        <li>
+          <a href="/playground">Playground</a>
         </li>
       </ul>
     </div>

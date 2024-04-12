@@ -5,8 +5,10 @@
 import * as $_slag_ from "./routes/[...slag].tsx";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $api_search from "./routes/api/search.ts";
 import * as $index from "./routes/index.tsx";
-
+import * as $playground from "./routes/playground.tsx";
+import * as $TextSearch from "./islands/TextSearch.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -14,9 +16,13 @@ const manifest = {
     "./routes/[...slag].tsx": $_slag_,
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
+    "./routes/api/search.ts": $api_search,
     "./routes/index.tsx": $index,
+    "./routes/playground.tsx": $playground,
   },
-  islands: {},
+  islands: {
+    "./islands/TextSearch.tsx": $TextSearch,
+  },
   baseUrl: import.meta.url,
 } satisfies Manifest;
 

@@ -226,12 +226,6 @@ thoth.unregisterTask()
 
 <ul>
   <li>
-    <a href="/api/sync" class="link link-primary hover:opacity-90 inline-block">
-      Sync API
-    </a>
-
-</li>
-  <li>
     <a href="/api/lazy" class="link link-primary hover:opacity-90 inline-block">
       Lazy API
     </a>
