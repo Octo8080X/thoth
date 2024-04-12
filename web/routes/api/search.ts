@@ -1,7 +1,7 @@
 import { FreshContext, Handlers } from "$fresh/server.ts";
 import { createThothClient } from "thoth";
 
-const kv = await Deno.openKv("D:/development/test/thoth-test/thoth3.db");
+const kv = await Deno.openKv();
 
 function chunkArray(array: (unknown)[], chunkSize: number) {
   const results = [];
