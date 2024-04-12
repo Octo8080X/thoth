@@ -20,7 +20,7 @@ export const handler: Handlers = {
       return new Response("No search keyword", { status: 400 });
     }
 
-    const thoth = createThothClient(kv, 3);
+    const thoth = createThothClient(kv, 4);
     const startTime = performance.now();
     const result = await thoth.search(q);
     const endTime = performance.now();
