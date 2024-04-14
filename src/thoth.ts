@@ -22,6 +22,20 @@ type ThothClient = {
   unregisterTask: () => Promise<void>;
 };
 
+/** 
+ * Create a Thoth client
+ * @param kv Deno.Kv instance
+ * @param gram number of grams
+ * @param defaultSync default sync mode
+ * @returns ThothClient
+ * 
+ * @example
+ * ```ts
+ * const kv = new ThothKv("thoth");
+ * const thoth = createThothClient(kv, 2);
+ * ```
+*/
+
 export function createThothClient(
   kv: Deno.Kv,
   gram: number,
