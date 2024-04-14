@@ -1,9 +1,10 @@
 {
   "name": "@octo/thoth",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "exports": "./mod.ts",
   "tasks": {
     "example:sync": "deno run --unstable-kv example/sync.ts",
     "example:lazy": "deno run --unstable-kv --unstable-cron example/lazy.ts"
-  }
+  },
+  "discription": "`Thoth` is full-text search on Deno KV."
 }
