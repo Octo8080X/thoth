@@ -7,7 +7,8 @@
       "jsr:@std/fmt@^0.221.0": "jsr:@std/fmt@0.221.0",
       "jsr:@std/testing": "jsr:@std/testing@0.221.0",
       "jsr:@std/ulid@0.221.0": "jsr:@std/ulid@0.221.0",
-      "npm:deepmerge": "npm:deepmerge@4.3.1"
+      "npm:deepmerge": "npm:deepmerge@4.3.1",
+      "npm:superjson@1.13.3": "npm:superjson@1.13.3"
     },
     "jsr": {
       "@cross/deepmerge@1.0.0": {
@@ -52,5 +53,8 @@
       }
     }
   },
-  "remote": {}
+  "remote": {
+    "https://deno.land/std@0.203.0/dotenv/load.ts": "0636983549b98f29ab75c9a22a42d9723f0a389ece5498fe971e7bb2556a12e2",
+    "https://deno.land/std@0.203.0/dotenv/mod.ts": "1da8c6d0e7f7d8a5c2b19400b763bc11739df24acec235dda7ea2cfd3d300057"
+  }
 }
