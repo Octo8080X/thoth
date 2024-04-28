@@ -1,0 +1,25 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "dev": "node ./node.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "type": "module",
+  "dependencies": {
+    "@cross/deepmerge": "npm:@jsr/cross__deepmerge@^1.0.0",
+    "@deno/kv": "^0.7.0",
+    "@std/ulid": "npm:@jsr/std__ulid@^0.224.0"
+  }
+}
