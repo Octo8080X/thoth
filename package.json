@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "tsx": "^4.7.3",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@cross/deepmerge": "npm:@jsr/cross__deepmerge@^1.0.0",
+    "@deno/kv": "^0.7.0",
+    "@std/ulid": "npm:@jsr/std__ulid@^0.221.0"
+  },
+  "type": "module"
+}

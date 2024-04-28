@@ -1,11 +1,18 @@
 {
   "compilerOptions": {
-    "lib": ["deno.unstable", "dom"],
+    "lib": ["deno.unstable", "dom","ES2022"],
     "module": "esnext",
     "target": "esnext",
     "baseUrl": ".",
     "paths": {
       "@octo/thoth": ["mod.ts"]
-    }
-  }
+    },
+    "lib": [
+      "es2022",
+      "esnext",
+    ],
+    "outDir": "dist",
+    "moduleResolution": "node"
+  },
+  "include": ["src"]
 }
